@@ -66,7 +66,7 @@ const NoteState = (props) => {
     // API call
 
     const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-      method: "POST",
+      method: "PUT",
 
       headers: {
         "auth-token":

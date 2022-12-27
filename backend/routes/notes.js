@@ -16,7 +16,6 @@ router.get("/fetchallnotes", fetchuser, async (req, res) => {
   }
 });
 // ROUTE 2:Add a new  note of the user POST "/api/notes/addnote"-login required
-
 router.post(
   "/addnote",
   fetchuser,
@@ -49,6 +48,7 @@ router.post(
     }
   }
 );
+
 // ROUTE 3:Update an existing  note of the user PUT "/api/notes/updatenote"-login required
 
 router.put(
