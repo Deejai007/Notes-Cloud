@@ -8,7 +8,7 @@ const Notes = () => {
   const { notes, getNotes, setnotes, editNote, addNote } = context;
   useEffect(() => {
     getNotes();
-  }, []);
+  }, [notes]);
   const ref = useRef(null);
   const refClose = useRef(null);
   const updateNote = (currentNote) => {
@@ -78,9 +78,12 @@ const Notes = () => {
                     Title
                   </label>
                   <input
+                    minLength={3}
+                    required
                     type="text"
                     name="etitle"
                     value={note.etitle}
+                    placeholder="minLength:3"
                     className="form-control"
                     id="einputTitle"
                     aria-describedby="etitleHelp"
@@ -95,10 +98,13 @@ const Notes = () => {
                     type="text"
                     value={note.etag}
                     name="etag"
+                    minLength={3}
+                    required
                     className="form-control"
                     id="etag"
                     aria-describedby="etagHelp"
                     onChange={onChange}
+                    placeholder="minLength:3"
                   />
                 </div>
                 <div className="mb-3">
@@ -107,12 +113,15 @@ const Notes = () => {
                   </label>
                   <input
                     value={note.edescription}
+                    minLength={3}
+                    required
                     name="edescription"
                     type="text"
                     className="form-control"
                     id="edescription"
                     aria-describedby="edescriptionHelp"
                     onChange={onChange}
+                    placeholder="minLength:3"
                   />
                 </div>
               </form>
@@ -130,6 +139,9 @@ const Notes = () => {
                 type="button"
                 className="btn btn-primary"
                 onClick={handleClick}
+                disabled={
+                  note.etitle.length < 3 || note.edescription.length < 3
+                }
               >
                 Save
               </button>
@@ -139,15 +151,25 @@ const Notes = () => {
       </div>
       <div className="row ">
         <h2>Your notes</h2>
-        {notes.map((note) => {
-          return (
-            <NoteItem
-              key={note._id}
-              note={note}
-              updateNote={updateNote}
-            ></NoteItem>
-          );
-        })}
+        {notes.length === 0 ? (
+          <img
+            src="https://i.pinimg.com/736x/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2---page-empty-page.jpg"
+            alt=""
+          />
+        ) : (
+          notes
+            .slice(0)
+            .reverse()
+            .map((note) => {
+              return (
+                <NoteItem
+                  key={note._id}
+                  note={note}
+                  updateNote={updateNote}
+                ></NoteItem>
+              );
+            })
+        )}
       </div>
     </>
   );
