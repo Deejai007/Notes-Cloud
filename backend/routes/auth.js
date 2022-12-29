@@ -16,6 +16,7 @@ router.post(
     body("password").isLength({ min: 5 }),
   ],
   async (req, res) => {
+    let success = false;
     //If there are errors then return bad request
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -32,6 +33,7 @@ router.post(
           .status(400)
           .json({ error: "Sorry a user with same email already exists" });
       }
+
       // Hashing the password;
       const salt = await bcrypt.genSalt(10);
       const hashedPass = await bcrypt.hash(req.body.password, salt);
@@ -49,11 +51,12 @@ router.post(
       };
       const authtoken = jwt.sign(data, JWT_SECRET);
 
+      success = true;
       (user) => res.json(user);
-      res.json({ authtoken });
+      res.json({ success, authtoken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Some Error occured");
+      res.status(500).send("Some Error occured(Internal server error)");
     }
   }
 );

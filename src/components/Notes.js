@@ -3,7 +3,7 @@ import { useState, useContext, useEffect, useRef } from "react";
 import NoteContext from "../Context/notes/NoteContext";
 import AddNote from "./AddNote";
 import NoteItem from "./NoteItem";
-const Notes = () => {
+const Notes = (props) => {
   const context = useContext(NoteContext);
   const { notes, getNotes, setnotes, editNote, addNote } = context;
   useEffect(() => {
@@ -166,6 +166,7 @@ const Notes = () => {
                   key={note._id}
                   note={note}
                   updateNote={updateNote}
+                  showAlert={props.showAlert}
                 ></NoteItem>
               );
             })
