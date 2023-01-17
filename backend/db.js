@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const mongoURI = "mongodb://localhost:27017/notebro";
+const mongoURI =
+  "mongodb+srv://ronaldo:UxU6ZnxOtOgnF7Pg@cluster0.wqfcdio.mongodb.net/test";
 mongoose.set("strictQuery", true);
 const connectToMongo = () => {
   mongoose.connect(mongoURI, () => {
@@ -7,3 +8,4 @@ const connectToMongo = () => {
   });
 };
 module.exports = connectToMongo;
+// "mongodb+srv://ronaldo:UxU6ZnxOtOgnF7Pg@cluster0.wqfcdio.mongodb.net/test";

@@ -1,6 +1,11 @@
 import React from "react";
-// import { useContext, useEffect } from "react";
-// import noteContext from "../Context/notes/NoteContext";
+import Navbar from "./Navbar";
+
 export const About = () => {
-  return <div>This is about and who is in class</div>;
+  return (
+    <div>
+      <Navbar />
+      This is about and who is in class
+    </div>
+  );
 };

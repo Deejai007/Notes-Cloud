@@ -2,12 +2,15 @@ import React from "react";
 import AddNote from "./AddNote";
 
 import Notes from "./Notes";
-const Home = (props) => {
+import Navbar from "./Navbar";
+const Home = () => {
+  // console.log(localStorage.token);
   return (
-    <div>
+    <>
+      <Navbar />
       {/* <AddNote /> */}
-      <Notes showAlert={props.showAlert} />
-    </div>
+      <Notes />
+    </>
   );
 };
 

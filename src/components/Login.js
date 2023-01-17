@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
-const Login = (props) => {
+import { toast } from "react-toastify";
+const Login = () => {
   let navigate = useNavigate();
   const [creds, setCreds] = useState({ email: "", password: "" });
   const handleSubmit = async (e) => {
@@ -15,15 +16,17 @@ const Login = (props) => {
       body: JSON.stringify(creds),
     });
 
-    const json = await response.json();
-    console.log(json);
-    if (json.success) {
+    const res = await response.json();
+    // console.log(res);
+    if (res.success) {
       // redirect
-      localStorage.setItem("token", json.authtoken);
+      localStorage.setItem("token", res.authtoken);
       navigate("/");
-      props.showAlert("Account created successsully", "success");
+      // props.showAlert("Account created successsully", "success");
+      toast.success("Success");
     } else {
-      props.showAlert("Invalid details", "danger");
+      // props.showAlert("Invalid details", "danger");
+      toast.error(res.error);
     }
   };
   const onchange1 = (e) => {
@@ -32,10 +35,9 @@ const Login = (props) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h3>Sign In</h3>
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
+          <label>Email address</label>
           <input
             type="email"
             value={creds.email}
@@ -45,14 +47,9 @@ const Login = (props) => {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
           />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
-          </div>
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Password
-          </label>
+          <label>Password</label>
           <input
             type="password"
             value={creds.password}
@@ -62,10 +59,26 @@ const Login = (props) => {
             id="exampleInputPassword1"
           />
         </div>
-
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+        <div className="mb-3">
+          <div className="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="customCheck1"
+            />
+            <label className="custom-control-label" htmlFor="customCheck1">
+              Remember me
+            </label>
+          </div>
+        </div>
+        <div className="d-grid">
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </div>
+        <p className="forgot-password text-right">
+          Forgot <a href="#">password?</a>
+        </p>
       </form>
     </div>
   );

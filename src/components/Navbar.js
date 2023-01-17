@@ -1,8 +1,14 @@
 import { React } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const Navbar = () => {
   let location = useLocation();
-
+  let navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+    toast.success("Logged out successfully");
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark light">
@@ -56,7 +62,7 @@ const Navbar = () => {
               /> */}
 
             {/* </form> */}
-            <Link
+            {/* <Link
               className="btn btn-outline-primary mx-1"
               to="login"
               role="button"
@@ -65,7 +71,10 @@ const Navbar = () => {
             </Link>
             <Link className="btn btn-primary mx-1" to="signup" role="button">
               Signup
-            </Link>
+            </Link> */}
+            <button className="btn btn-warning" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         </div>
       </nav>
