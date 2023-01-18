@@ -10,7 +10,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <>
@@ -31,9 +31,36 @@ function App() {
         <NoteState>
           <div className="container">
             <Routes>
-              <Route exact path={"/"} element={<Home />} />
-              <Route exact path={"/home"} element={<Home />} />
-              <Route exact path={"/about"} element={<About />} />
+              {/* <Route exact path={"/"} element={<Home />} /> */}
+              {/* <ProtectedRoute exact path={"/home"} element={<Home />} /> */}
+              {/* <Route path="/home" element={<ProtectedRoute element={Home} />} /> */}
+              {/* <Route path="/" element={<ProtectedRoute element={Home} />} /> */}
+              <Route
+                path=""
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/home"
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/about"
+                element={
+                  <ProtectedRoute>
+                    <About />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* <Route exact path={"/about"} element={<About />} /> */}
               <Route exact path={"/login"} element={<Login />} />
               <Route exact path={"/signup"} element={<Signup />} />
             </Routes>

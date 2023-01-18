@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signup = (props) => {
   let navigate = useNavigate();
@@ -12,7 +13,7 @@ const Signup = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (creds.password !== creds.cpassword) {
-      alert("Passwords dont match!");
+      toast.error("Passwords don't match!");
       return;
     }
     const response = await fetch("http://localhost:5001/api/auth/createuser", {
@@ -29,14 +30,17 @@ const Signup = (props) => {
     });
 
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
+
     if (json.success) {
       // redirect
       localStorage.setItem("token", json.authtoken);
       navigate("/");
-      props.showAlert("Account created successsully", "success");
+      // props.showAlert("Account created successsully", "success");
+      toast.success("Account Created Successfully");
     } else {
-      props.showAlert("Invalid Credentials", "danger");
+      // props.showAlert("Invalid Credentials", "danger");
+      toast.error("Invalid Credentials");
     }
   };
   const onchange = (e) => {

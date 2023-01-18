@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 const Login = () => {
   let navigate = useNavigate();
   const [creds, setCreds] = useState({ email: "", password: "" });
@@ -78,6 +79,9 @@ const Login = () => {
         </div>
         <p className="forgot-password text-right">
           Forgot <a href="#">password?</a>
+        </p>
+        <p className="new-user text-left">
+          New User ? <Link to="/signup">Signup</Link> here.
         </p>
       </form>
     </div>
