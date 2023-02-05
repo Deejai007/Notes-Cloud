@@ -9,6 +9,7 @@ const Navbar = () => {
     navigate("/login");
     toast.success("Logged out successfully");
   };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark light">
@@ -51,30 +52,37 @@ const Navbar = () => {
                   About
                 </Link>
               </li>
-            </ul>
-            {/* <form className="d-flex" role="search"> */}
-            {/* <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                placeholder="Search"
-                aria-label="Search"
-              /> */}
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i className="fa fa-user mx-2"></i>
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                  </li>
 
-            {/* </form> */}
-            {/* <Link
-              className="btn btn-outline-primary mx-1"
-              to="login"
-              role="button"
-            >
-              Login
-            </Link>
-            <Link className="btn btn-primary mx-1" to="signup" role="button">
-              Signup
-            </Link> */}
-            <button className="btn btn-warning" onClick={handleLogout}>
-              Logout
-            </button>
+                  <button
+                    className="btn mx-1 text-warning "
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </ul>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>

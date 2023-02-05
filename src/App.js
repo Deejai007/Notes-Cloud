@@ -31,10 +31,6 @@ function App() {
         <NoteState>
           <div className="container">
             <Routes>
-              {/* <Route exact path={"/"} element={<Home />} /> */}
-              {/* <ProtectedRoute exact path={"/home"} element={<Home />} /> */}
-              {/* <Route path="/home" element={<ProtectedRoute element={Home} />} /> */}
-              {/* <Route path="/" element={<ProtectedRoute element={Home} />} /> */}
               <Route
                 path=""
                 element={
@@ -44,6 +40,7 @@ function App() {
                 }
               />
               <Route
+                exact
                 path="/home"
                 element={
                   <ProtectedRoute>
@@ -52,6 +49,7 @@ function App() {
                 }
               />
               <Route
+                exact
                 path="/about"
                 element={
                   <ProtectedRoute>
@@ -59,8 +57,14 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-
-              {/* <Route exact path={"/about"} element={<About />} /> */}
+              <Route
+                path="addnote"
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
               <Route exact path={"/login"} element={<Login />} />
               <Route exact path={"/signup"} element={<Signup />} />
             </Routes>
