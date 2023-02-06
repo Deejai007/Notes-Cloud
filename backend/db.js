@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
-const mongoURI =
-  "mongodb+srv://ronaldo:UxU6ZnxOtOgnF7Pg@cluster0.wqfcdio.mongodb.net/test";
+
+const test = require("dotenv").config();
+
+const mongoURI = process.env.DB;
 mongoose.set("strictQuery", true);
 const connectToMongo = () => {
   mongoose.connect(mongoURI, () => {
@@ -8,4 +10,3 @@ const connectToMongo = () => {
   });
 };
 module.exports = connectToMongo;
-// "mongodb+srv://ronaldo:UxU6ZnxOtOgnF7Pg@cluster0.wqfcdio.mongodb.net/test";

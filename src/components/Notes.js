@@ -38,7 +38,7 @@ const Notes = (props) => {
 
   return (
     <>
-      <AddNote />
+      {/* <AddNote /> */}
       {/* <!-- Button trigger modal --> */}
       <button
         ref={ref}
