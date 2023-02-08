@@ -35,7 +35,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      {/* <AddNote /> */}
+      <AddNote />
       <Notes />
     </>
   );

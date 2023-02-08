@@ -1,12 +1,23 @@
 const mongoose = require("mongoose");
 
-const test = require("dotenv").config();
+// require("dotenv").config();
 
-const mongoURI = process.env.DB;
-mongoose.set("strictQuery", true);
+// const mongoURL = process.env.DB;
+// console.log(mongoURL)
+// console.log(mongoURL);
 const connectToMongo = () => {
-  mongoose.connect(mongoURI, () => {
-    console.log("~~~~~~ Connected to mongo");
-  });
+  mongoose.set("strictQuery", true);
+  // mongoose.connect(
+  //   "mongodb+srv://ronaldo:UxU6ZnxOtOgnF7Pg@cluster0.wqfcdio.mongodb.net/test",
+  //   () => {
+  //     console.log("~~~~~~ Connected to mongo");
+  //   }
+  // );
+  mongoose.connect(
+    "mongodb+srv://ronaldo:UxU6ZnxOtOgnF7Pg@cluster0.wqfcdio.mongodb.net/test",
+    () => {
+      console.log("Cum");
+    }
+  );
 };
 module.exports = connectToMongo;
