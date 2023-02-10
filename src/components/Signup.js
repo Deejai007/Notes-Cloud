@@ -16,18 +16,21 @@ const Signup = (props) => {
       toast.error("Passwords don't match!");
       return;
     }
-    const response = await fetch("http://localhost:5001/api/auth/createuser", {
-      method: "POST",
+    const response = await fetch(
+      "https://notescloud.onrender.com/api/auth/createuser",
+      {
+        method: "POST",
 
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: creds.name,
-        email: creds.email,
-        password: creds.password,
-      }),
-    });
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: creds.name,
+          email: creds.email,
+          password: creds.password,
+        }),
+      }
+    );
 
     const json = await response.json();
     // console.log(json);

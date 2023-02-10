@@ -8,7 +8,7 @@ const Home = () => {
   // const Notes = (props) => {
   const [userProfile, setuserProfile] = useState();
   const getUser = async () => {
-    const host = "http://localhost:5001";
+    const host = "https://notescloud.onrender.com";
 
     // Get all Notes
 
