@@ -31,7 +31,7 @@ const Home = () => {
   useEffect(() => {
     getUser();
   }, []);
-  // console.log(localStorage.token);
+
   return (
     <>
       <Navbar />
