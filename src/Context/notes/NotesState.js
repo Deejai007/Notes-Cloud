@@ -14,15 +14,12 @@ const NoteState = (props) => {
       method: "GET",
 
       headers: {
-        // "auth-token":
-        //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNhMjFlYmFiZjMzNjFkODY5MjJlYmU5In0sImlhdCI6MTY3MTU2OTA5NX0.wp-r2WbSpMBzxIHd77Sp-2WNLC9O6JDHSQ4sVj8f8vU",
         "auth-token": `${localStorage.token}`,
         "Content-Type": "application/json",
       },
     });
     const json = await response.json();
     setNotes(json);
-    // console.log(json);
   };
   // Add a note
   const addNote = async (title, description, tag) => {
@@ -38,7 +35,7 @@ const NoteState = (props) => {
 
       body: JSON.stringify({ title, description, tag }),
     });
-    // const json = response.json();
+
     console.log("Adding a new note");
   };
   // Delete a note

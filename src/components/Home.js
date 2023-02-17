@@ -5,12 +5,10 @@ import Notes from "./Notes";
 import Navbar from "./Navbar";
 
 const Home = () => {
-  // const Notes = (props) => {
   const [userProfile, setuserProfile] = useState();
+  // Get all Notes
   const getUser = async () => {
     const host = "https://notescloud.onrender.com";
-
-    // Get all Notes
 
     // API call
 
@@ -33,11 +31,13 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div>
       <Navbar />
-      <AddNote />
-      <Notes />
-    </>
+      <div className="container">
+        <AddNote />
+        <Notes />
+      </div>
+    </div>
   );
 };
 

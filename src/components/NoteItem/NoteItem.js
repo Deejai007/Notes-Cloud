@@ -7,8 +7,7 @@ const NoteItem = ({ note, updateNote }) => {
   const { deleteNote } = context;
 
   return (
-    // <div className="col-md-3  my-3">
-    <div className="card col-md-3">
+    <div className="card col-md-3 my-2 mx-1 center">
       <div className="card-body">
         <div className="d-flex align-items-center justify-content-between my-1">
           <h5 className="card-title">{note.title}</h5>
@@ -33,7 +32,6 @@ const NoteItem = ({ note, updateNote }) => {
         </div>
       </div>
     </div>
-    // </div>
   );
 };
 

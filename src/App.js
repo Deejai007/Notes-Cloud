@@ -29,46 +29,46 @@ function App() {
       ></ToastContainer>
       <BrowserRouter>
         <NoteState>
-          <div className="container">
-            <Routes>
-              <Route
-                path=""
-                element={
-                  <ProtectedRoute>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                exact
-                path="/home"
-                element={
-                  <ProtectedRoute>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                exact
-                path="/about"
-                element={
-                  <ProtectedRoute>
-                    <About />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="addnote"
-                element={
-                  <ProtectedRoute>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
-              <Route exact path={"/login"} element={<Login />} />
-              <Route exact path={"/signup"} element={<Signup />} />
-            </Routes>
-          </div>
+          {/* <div className="container"> */}
+          <Routes>
+            <Route
+              path=""
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/about"
+              element={
+                <ProtectedRoute>
+                  <About />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="addnote"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route exact path={"/login"} element={<Login />} />
+            <Route exact path={"/signup"} element={<Signup />} />
+          </Routes>
+          {/* </div> */}
         </NoteState>
       </BrowserRouter>
     </>

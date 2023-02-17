@@ -27,8 +27,6 @@ const Notes = (props) => {
     id: "",
   });
   const handleClick = (e) => {
-    // addNote(note.etitle, note.edescription, note.etag);
-    // console.log(note);
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
   };
@@ -38,8 +36,6 @@ const Notes = (props) => {
 
   return (
     <>
-      {/* <AddNote /> */}
-      {/* <!-- Button trigger modal --> */}
       <button
         ref={ref}
         type="button"
@@ -50,7 +46,6 @@ const Notes = (props) => {
         Edit note
       </button>
 
-      {/* <!-- Modal --> */}
       <div
         className="modal fade"
         id="exampleModal"
@@ -149,26 +144,23 @@ const Notes = (props) => {
           </div>
         </div>
       </div>
-      <div className="row ">
-        <h2>Your notes</h2>
+      <h2>Your notes</h2>
+      <div className="row d-flex justify-content-md-around">
         {notes.length === 0 ? (
           <img
             src="https://i.pinimg.com/736x/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2---page-empty-page.jpg"
             alt=""
           />
         ) : (
-          notes
-            .slice(0)
-            .reverse()
-            .map((note) => {
-              return (
-                <NoteItem
-                  key={note._id}
-                  note={note}
-                  updateNote={updateNote}
-                ></NoteItem>
-              );
-            })
+          notes.reverse().map((note) => {
+            return (
+              <NoteItem
+                key={note._id}
+                note={note}
+                updateNote={updateNote}
+              ></NoteItem>
+            );
+          })
         )}
       </div>
     </>
