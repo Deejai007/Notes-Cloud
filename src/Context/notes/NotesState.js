@@ -24,7 +24,7 @@ const NoteState = (props) => {
   // Add a note
   const addNote = async (title, description, tag) => {
     // API call
-
+    console.log("Add note api called");
     await fetch(`${host}/api/notes/addnote`, {
       method: "POST",
 
@@ -35,7 +35,6 @@ const NoteState = (props) => {
 
       body: JSON.stringify({ title, description, tag }),
     });
-
     console.log("Adding a new note");
   };
   // Delete a note

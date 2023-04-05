@@ -9,14 +9,19 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useContext, useState } from "react";
 import NoteContext from "../Context/notes/NoteContext";
 import AddNote from "./Temp";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 export default function Dialogfp() {
+  const [loading, setLoading] = useState(0);
   const context = useContext(NoteContext);
   const { addNote } = context;
   const [note, setNote] = useState({ title: "", description: "", tag: "" });
-  const handleClick = (e) => {
-    // e.preventDefault();
-    addNote(note.title, note.description, note.tag);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(1);
+    await addNote(note.title, note.description, note.tag);
+
     setNote({ title: "", description: "", tag: "" });
     setOpen(false);
   };
@@ -25,7 +30,7 @@ export default function Dialogfp() {
   };
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleSubmitOpen = () => {
     setOpen(true);
   };
 
@@ -35,10 +40,10 @@ export default function Dialogfp() {
 
   return (
     <div>
-      {/* <Button variant="text" onClick={handleClickOpen}>
+      {/* <Button variant="text" onClick={handleSubmitOpen}>
         +
       </Button> */}
-      <div className="add-btn" onClick={handleClickOpen}>
+      <div className="add-btn" onClick={handleSubmitOpen}>
         <p>+</p>
       </div>
       <Dialog open={open} onClose={handleClose}>
@@ -46,15 +51,13 @@ export default function Dialogfp() {
           Add new note <span onClick={handleClose}>X</span>
         </DialogTitle>
         <DialogContent>
-          <form>
+          <form className=" d-flex flex-column align-content-center">
             <div className="mb-3">
               <label htmlFor="title" className="form-label">
                 Title
               </label>
               <input
                 type="text"
-                // minLength={3}
-                // required
                 value={note.title}
                 name="title"
                 className="form-control"
@@ -100,14 +103,23 @@ export default function Dialogfp() {
               />
             </div>
 
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={handleClick}
-              disabled={note.title.length < 3 || note.description.length < 3}
-            >
-              Add Note
-            </button>
+            {loading ? (
+              <button type="submit" className="btn btn-primary px-4 ">
+                <div className="px-3">
+                  <CircularProgress size={20} color="warning" />
+                </div>
+                {/* Submit */}
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="btn btn-primary py-2 px-3 "
+                onClick={handleSubmit}
+                disabled={note.title.length < 3 || note.description.length < 3}
+              >
+                Add Note
+              </button>
+            )}
           </form>
         </DialogContent>
       </Dialog>

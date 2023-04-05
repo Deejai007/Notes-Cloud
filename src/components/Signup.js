@@ -1,8 +1,10 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 const Signup = (props) => {
+  const [loading, setloading] = useState(0);
   let navigate = useNavigate();
   const [creds, setCreds] = useState({
     name: "",
@@ -104,9 +106,17 @@ const Signup = (props) => {
             id="exampleFormControlInput1"
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+        {loading ? (
+          <button type="submit" className="btn btn-primary ">
+            <CircularProgress size={38} color="warning" />
+            {/* Submit */}
+          </button>
+        ) : (
+          <button type="submit" className="btn btn-primary py-3">
+            Submit
+            {/* <CircularProgress size={35} color="warning" /> */}
+          </button>
+        )}
       </form>
     </div>
   );

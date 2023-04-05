@@ -7,7 +7,9 @@ const Notes = (props) => {
   const context = useContext(NoteContext);
   const { notes, getNotes, setnotes, editNote, addNote } = context;
   useEffect(() => {
+    console.log("getting notes");
     getNotes();
+    console.log("got notes!");
   }, [notes]);
   const ref = useRef(null);
   const refClose = useRef(null);
@@ -20,18 +22,27 @@ const Notes = (props) => {
       id: currentNote._id,
     });
   };
-  const [note, setNote] = useState({
+
+  const [editnote, setNote] = useState({
     etitle: "",
     edescription: "",
     etag: "",
     id: "",
   });
-  const handleClick = (e) => {
-    editNote(note.id, note.etitle, note.edescription, note.etag);
+  const handleClick = async (e) => {
+    console.log("Upadating");
+    await editNote(
+      editnote.id,
+      editnote.etitle,
+      editnote.edescription,
+      editnote.etag
+    );
     refClose.current.click();
+    console.log("Updated");
   };
+
   const onChange = (e) => {
-    setNote({ ...note, [e.target.name]: e.target.value });
+    setNote({ ...editnote, [e.target.name]: e.target.value });
   };
 
   return (
@@ -77,12 +88,12 @@ const Notes = (props) => {
                     required
                     type="text"
                     name="etitle"
-                    value={note.etitle}
+                    value={editnote.etitle}
                     placeholder="minLength:3"
                     className="form-control"
                     id="einputTitle"
                     aria-describedby="etitleHelp"
-                    onChange={onChange}
+                    onChange={(e) => e.target.value}
                   />
                 </div>
                 <div className="mb-3">
@@ -91,7 +102,7 @@ const Notes = (props) => {
                   </label>
                   <input
                     type="text"
-                    value={note.etag}
+                    value={editnote.etag}
                     name="etag"
                     minLength={3}
                     required
@@ -107,7 +118,7 @@ const Notes = (props) => {
                     description
                   </label>
                   <input
-                    value={note.edescription}
+                    value={editnote.edescription}
                     minLength={3}
                     required
                     name="edescription"
@@ -135,7 +146,7 @@ const Notes = (props) => {
                 className="btn btn-primary"
                 onClick={handleClick}
                 disabled={
-                  note.etitle.length < 3 || note.edescription.length < 3
+                  editnote.etitle.length < 3 || editnote.edescription.length < 3
                 }
               >
                 Save
@@ -152,11 +163,11 @@ const Notes = (props) => {
             alt=""
           />
         ) : (
-          notes.reverse().map((note) => {
+          notes.map((ote) => {
             return (
               <NoteItem
-                key={note._id}
-                note={note}
+                key={ote._id}
+                note={ote}
                 updateNote={updateNote}
               ></NoteItem>
             );

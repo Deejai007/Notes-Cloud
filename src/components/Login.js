@@ -2,11 +2,15 @@ import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 const Login = () => {
+  const [loading, setLoading] = useState(0);
   let navigate = useNavigate();
   const [creds, setCreds] = useState({ email: "", password: "" });
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(1);
 
     const response = await fetch(
       "https://notescloud.onrender.com/api/auth/login",
@@ -32,6 +36,7 @@ const Login = () => {
       // props.showAlert("Invalid details", "danger");
       toast.error(res.error);
     }
+    setLoading(0);
   };
   const onchange1 = (e) => {
     setCreds({ ...creds, [e.target.name]: e.target.value });
@@ -46,6 +51,7 @@ const Login = () => {
             type="email"
             value={creds.email}
             onChange={onchange1}
+            required
             name="email"
             className="form-control"
             id="exampleInputEmail1"
@@ -57,6 +63,7 @@ const Login = () => {
           <input
             type="password"
             value={creds.password}
+            required
             onChange={onchange1}
             name="password"
             className="form-control"
@@ -76,9 +83,17 @@ const Login = () => {
           </div>
         </div>
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
+          {loading ? (
+            <button type="submit" className="btn btn-primary ">
+              <CircularProgress size={38} color="warning" />
+              {/* Submit */}
+            </button>
+          ) : (
+            <button type="submit" className="btn btn-primary py-3">
+              Submit
+              {/* <CircularProgress size={35} color="warning" /> */}
+            </button>
+          )}
         </div>
         <p className="forgot-password text-right">
           Forgot <a href="#">password?</a>

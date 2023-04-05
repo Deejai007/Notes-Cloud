@@ -9,7 +9,7 @@ const router = express.Router();
 router.get("/fetchallnotes", fetchuser, async (req, res) => {
   try {
     const notes = await Note.find({ user: req.user.id });
-    res.json(notes);
+    res.json(notes.reverse());
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Some Error occured in create note");
