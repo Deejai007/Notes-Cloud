@@ -15,7 +15,7 @@ import Box from "@mui/material/Box";
 export default function Dialogfp() {
   const [loading, setLoading] = useState(0);
   const context = useContext(NoteContext);
-  const { addNote } = context;
+  const { addNote, getNotes } = context;
   const [note, setNote] = useState({ title: "", description: "", tag: "" });
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +23,9 @@ export default function Dialogfp() {
     await addNote(note.title, note.description, note.tag);
 
     setNote({ title: "", description: "", tag: "" });
+    getNotes();
     setOpen(false);
+    setLoading(0);
   };
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
@@ -43,9 +45,11 @@ export default function Dialogfp() {
       {/* <Button variant="text" onClick={handleSubmitOpen}>
         +
       </Button> */}
-      <div className="add-btn" onClick={handleSubmitOpen}>
-        <p>+</p>
-      </div>
+      {!open && (
+        <div className="add-btn" onClick={handleSubmitOpen}>
+          <p>+</p>
+        </div>
+      )}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle className="add-title">
           Add new note <span onClick={handleClose}>X</span>

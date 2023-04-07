@@ -53,7 +53,8 @@ const Signup = (props) => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login-form">
+        <h3>Sign Up</h3>
         <div className="mb-3">
           <label htmlFor="exampleFormControlInput1" className="form-label">
             Username

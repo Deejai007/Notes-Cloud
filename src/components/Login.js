@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import "./Login.css";
 const Login = () => {
   const [loading, setLoading] = useState(0);
   let navigate = useNavigate();
@@ -42,8 +43,8 @@ const Login = () => {
     setCreds({ ...creds, [e.target.name]: e.target.value });
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="d-flex row justify-content-center items-center">
+      <form onSubmit={handleSubmit} className="login-form">
         <h3>Sign In</h3>
         <div className="mb-3">
           <label>Email address</label>
