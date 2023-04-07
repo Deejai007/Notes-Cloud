@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import NoteContext from "../../Context/notes/NoteContext";
+import CircularProgress from "@mui/material/CircularProgress";
 import "./NoteItem.css";
 const NoteItem = ({ note, updateNote }) => {
   const context = useContext(NoteContext);
   const { deleteNote } = context;
-
+  const [dltload, setDltload] = useState(false);
+  const deleteClick = async () => {
+    setDltload(true);
+    await deleteNote(note._id);
+    setDltload(false);
+  };
   return (
     <div className="card col-md-3 my-2 mx-1 center">
       <div className="card-body">
@@ -23,12 +29,12 @@ const NoteItem = ({ note, updateNote }) => {
               updateNote(note);
             }}
           ></i>
-          <i
-            className="fa-solid fa-trash-can mx-2"
-            onClick={() => {
-              deleteNote(note._id);
-            }}
-          ></i>
+
+          {dltload ? (
+            <CircularProgress size={20} color="error" />
+          ) : (
+            <i className="fa-solid fa-trash-can mx-2" onClick={deleteClick}></i>
+          )}
         </div>
       </div>
     </div>

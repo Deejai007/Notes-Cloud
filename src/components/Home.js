@@ -19,6 +19,8 @@ const Home = () => {
         "auth-token": `${localStorage.token}`,
         "Content-Type": "application/json",
       },
+    }).catch((err) => {
+      console.log(err);
     });
     const json = await response.json();
     console.log(json);

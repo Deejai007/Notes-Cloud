@@ -3,14 +3,16 @@ import { useState, useContext, useEffect, useRef } from "react";
 import NoteContext from "../Context/notes/NoteContext";
 import AddNote from "./AddNote";
 import NoteItem from "./NoteItem/NoteItem";
+import CircularProgress from "@mui/material/CircularProgress";
 const Notes = (props) => {
+  const [updateLoading, setupdateLoading] = useState(false);
   const context = useContext(NoteContext);
   const { notes, getNotes, setnotes, editNote, addNote } = context;
   useEffect(() => {
     console.log("getting notes");
     getNotes();
     console.log("got notes!");
-  }, [notes]);
+  }, []);
   const ref = useRef(null);
   const refClose = useRef(null);
   const updateNote = (currentNote) => {
@@ -30,15 +32,16 @@ const Notes = (props) => {
     id: "",
   });
   const handleClick = async (e) => {
-    console.log("Upadating");
+    setupdateLoading(true);
     await editNote(
       editnote.id,
       editnote.etitle,
       editnote.edescription,
       editnote.etag
     );
+    setupdateLoading(false);
+    getNotes();
     refClose.current.click();
-    console.log("Updated");
   };
 
   const onChange = (e) => {
@@ -93,7 +96,7 @@ const Notes = (props) => {
                     className="form-control"
                     id="einputTitle"
                     aria-describedby="etitleHelp"
-                    onChange={(e) => e.target.value}
+                    onChange={onChange}
                   />
                 </div>
                 <div className="mb-3">
@@ -141,16 +144,23 @@ const Notes = (props) => {
               >
                 Close
               </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={handleClick}
-                disabled={
-                  editnote.etitle.length < 3 || editnote.edescription.length < 3
-                }
-              >
-                Save
-              </button>
+              {updateLoading ? (
+                <div className="px-3">
+                  <CircularProgress size={30} />
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleClick}
+                  disabled={
+                    editnote.etitle.length < 3 ||
+                    editnote.edescription.length < 3
+                  }
+                >
+                  Save
+                </button>
+              )}
             </div>
           </div>
         </div>
